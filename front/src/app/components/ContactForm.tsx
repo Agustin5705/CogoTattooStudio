@@ -11,9 +11,27 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data: FormData) => {
+    try {
+      // Envía una solicitud POST al endpoint de tu backend
+      const response = await fetch("http://localhost:3001/form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("¡El mensaje se ha enviado con éxito!");
+        reset(); // Limpia el formulario solo si el envío fue exitoso
+      } else {
+        alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
+    }
   };
 
   return (
