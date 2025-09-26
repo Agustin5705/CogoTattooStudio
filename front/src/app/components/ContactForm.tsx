@@ -11,10 +11,12 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormData>();
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const onSubmit = async (data: FormData) => {
     try {
       // Envía una solicitud POST al endpoint de tu backend
-      const response = await fetch("http://localhost:3001/form", {
+      const response = await fetch(`${apiUrl}/form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
