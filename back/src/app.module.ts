@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { FormModule } from './form/form.module';
 import { MailerModule } from './mailer/mailer.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
-  imports: [PrismaModule, FormModule, MailerModule],
+  imports: [PrismaModule, FormModule, MailerModule, CloudinaryModule],
   controllers: [AppController],
   providers: [AppService],
 })
