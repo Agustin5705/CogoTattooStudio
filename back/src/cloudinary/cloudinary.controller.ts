@@ -1,3 +1,4 @@
+import 'multer';
 import {
   Controller,
   Post,
@@ -16,7 +17,7 @@ export class CloudinaryController {
   constructor(private readonly cloudinaryService: CloudinaryService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('file')) // 'file' es el nombre del campo en el formulario del frontend
+  @UseInterceptors(FileInterceptor('file')) // 'File' es el nombre del campo en el formulario del frontend
   async uploadFile(
     @UploadedFile(
       new ParseFilePipe({

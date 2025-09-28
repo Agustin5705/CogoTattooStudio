@@ -1,38 +1,90 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FormData } from "../types/form";
+import { ContactFormData } from "../types/form";
 
 export function ContactForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<ContactFormData>();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ContactFormData) => {
+    // 1. ACTIVA LA CARGA AL INICIO
+    setIsLoading(true);
+
+    const file = data.referenceImage ? data.referenceImage[0] : null;
+    let imageUrl = data.link;
+
+    if (!file && !data.link) {
+      alert("Debe proporcionar una URL o subir una imagen de referencia.");
+      // 2. DESACTIVA LA CARGA SI FALLA LA VALIDACIÓN INICIAL
+      setIsLoading(false);
+      return;
+    } // --- 1. SUBIDA DE IMAGEN A CLOUDINARY (Llamada 1) ---
+
+    if (file) {
+      try {
+        // Creamos el FormData nativo para enviar el archivo binario
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+
+        const uploadResponse = await fetch(`${apiUrl}/upload`, {
+          method: "POST",
+          body: uploadData,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error("Error al subir la imagen a Cloudinary.");
+        }
+        const result = await uploadResponse.json();
+        imageUrl = result.secure_url;
+      } catch (error) {
+        console.error("Error en la subida de imagen:", error);
+        alert(
+          "Hubo un error al subir la imagen de referencia. Por favor, inténtalo de nuevo."
+        );
+        // 3. DESACTIVA LA CARGA SI FALLA LA SUBIDA
+        setIsLoading(false);
+        return;
+      }
+    } // --- 2. ENVÍO DEL FORMULARIO FINAL (Llamada 2) ---
+
+    const formPayload = {
+      fullName: data.fullName,
+      wpp: data.wpp,
+      presupuesto: data.presupuesto,
+      fecha: data.fecha,
+      link: imageUrl,
+    };
+
     try {
-      // Envía una solicitud POST al endpoint de tu backend
       const response = await fetch(`${apiUrl}/form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formPayload),
       });
 
       if (response.ok) {
-        alert("¡El mensaje se ha enviado con éxito!");
-        reset(); // Limpia el formulario solo si el envío fue exitoso
+        alert("¡Mensaje y archivo enviados con éxito!");
+        reset();
       } else {
         alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
       }
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
+      console.error("Error al enviar el formulario final:", error);
       alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
+    } finally {
+      // 4. DESACTIVA LA CARGA AL FINAL, INDEPENDIENTEMENTE DEL RESULTADO
+      setIsLoading(false);
     }
   };
 
@@ -48,9 +100,13 @@ export function ContactForm() {
       <p>Fecha disponible:</p>
       <input type="date" {...register("fecha")} />
       {errors.fecha && <p>{errors.fecha.message}</p>}
-
-      {/* imagen */}
-      {/* pendiente: implementar tecnologia para subir imagenes */}
+      <p>Imagen de referencia:</p>
+      <input
+        type="file"
+        accept="image/png, image/jpeg" // Restringir a formatos de imagen
+        {...register("referenceImage")}
+      />
+      {errors.referenceImage && <p>{errors.referenceImage.message}</p>}
       <p>Dirección de la imagen de referencia:</p>
       <input
         type="url"
@@ -71,7 +127,6 @@ export function ContactForm() {
       />
       {errors.presupuesto && <p>{errors.presupuesto.message}</p>}
       <p>Teléfono de contacto:</p>
-
       <input
         type="tel"
         placeholder="Número de WhatsApp"
@@ -92,7 +147,18 @@ export function ContactForm() {
         })}
       />
       {errors.wpp && <p>{errors.wpp.message}</p>}
-      <input type="submit" />
+      <input
+        type="submit"
+        value={isLoading ? "Enviando, espere..." : "Enviar Solicitud"}
+        disabled={isLoading}
+      />
+      {/* DISCLAIMER VISIBLE SOLO DURANTE LA CARGA */}
+      {isLoading && (
+        <p style={{ color: "blue", fontWeight: "bold" }}>
+          Estamos subiendo tu imagen y enviando el formulario, por favor, no
+          cierres esta página.
+        </p>
+      )}
     </form>
   );
 }
