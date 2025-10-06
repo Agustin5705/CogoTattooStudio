@@ -7,7 +7,6 @@ import {
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
-  Body,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from './cloudinary.service';
@@ -17,11 +16,11 @@ export class CloudinaryController {
   constructor(private readonly cloudinaryService: CloudinaryService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('file')) // 'File' es el nombre del campo en el formulario del frontend
+  @UseInterceptors(FileInterceptor('file')) // 'file' es el nombre del campo en el formulario del frontend
   async uploadFile(
     @UploadedFile(
       new ParseFilePipe({
-        // Validación de archivos:
+        // Mantenemos tu lógica de validación de archivos
         validators: [
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 5 }), // Máximo 5MB
           new FileTypeValidator({ fileType: 'image/(jpeg|png|jpg)' }), // Solo JPEG, PNG, JPG
@@ -30,7 +29,8 @@ export class CloudinaryController {
     )
     file: Express.Multer.File,
   ) {
-    // Llama al servicio para subir el archivo
-    return this.cloudinaryService.uploadFile(file);
+    // CAMBIO REQUERIDO: Le pasamos 'contact-forms' al servicio para que sepa dónde subir.
+    // Esto previene que se rompa el código después de modificar CloudinaryService.
+    return this.cloudinaryService.uploadFile(file, 'contact-forms');
   }
 }
