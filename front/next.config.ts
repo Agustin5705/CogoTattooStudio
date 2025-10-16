@@ -9,6 +9,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: "",
+        pathname: "/**",
+      },
     ],
     // Esto es un fallback por si usas versiones anteriores o solo quieres la propiedad 'domains'
     domains: ["res.cloudinary.com"],
