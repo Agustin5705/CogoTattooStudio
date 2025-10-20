@@ -18,7 +18,10 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Columna 1: Logo y Derechos */}
           <div className="col-span-2 md:col-span-1 space-y-4">
-            <Link href="/" className="flex items-center space-x-3 group">
+            <Link
+              href="/"
+              className="flex items-center space-x-3 group animate-pulse font-pirata"
+            >
               <Image
                 src="/cts.png"
                 alt="Logo CTS"

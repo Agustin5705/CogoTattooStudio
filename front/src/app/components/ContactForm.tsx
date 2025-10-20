@@ -89,25 +89,42 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p>Nombre completo:</p>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-3xl mx-auto p-6 md:p-10 bg-gray-800 rounded-xl shadow-2xl border border-gray-700/50 mt-2"
+    >
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Nombre completo:
+      </p>
       <input
         type="text"
         placeholder="Tu nombre completo"
         {...register("fullName", { required: true })}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
       />
       {errors.fullName && <p>Por favor ingrese su nombre completo.</p>}
-      <p>Fecha disponible:</p>
-      <input type="date" {...register("fecha")} />
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Fecha disponible:
+      </p>
+      <input
+        type="date"
+        {...register("fecha")}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
+      />
       {errors.fecha && <p>{errors.fecha.message}</p>}
-      <p>Imagen de referencia:</p>
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Imagen de referencia:
+      </p>
       <input
         type="file"
         accept="image/png, image/jpeg" // Restringir a formatos de imagen
         {...register("referenceImage")}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
       />
       {errors.referenceImage && <p>{errors.referenceImage.message}</p>}
-      <p>Dirección de la imagen de referencia:</p>
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Dirección de la imagen de referencia:
+      </p>
       <input
         type="url"
         placeholder="Link de la imagen de modelo"
@@ -117,16 +134,22 @@ export function ContactForm() {
             message: "Por favor, ingresa una URL válida.",
           },
         })}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
       />
       {errors.link && <p>{errors.link.message}</p>}
-      <p>Presupuesto disponible:</p>
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Presupuesto disponible:
+      </p>
       <input
         type="number"
         placeholder="Presupuesto disponible"
         {...register("presupuesto", { valueAsNumber: true })}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
       />
       {errors.presupuesto && <p>{errors.presupuesto.message}</p>}
-      <p>Teléfono de contacto:</p>
+      <p className="block text-sm text-gray-300 mt-4 font-bold">
+        Teléfono de contacto:
+      </p>
       <input
         type="tel"
         placeholder="Número de WhatsApp"
@@ -145,12 +168,14 @@ export function ContactForm() {
             message: "El número de teléfono debe tener 9 dígitos.",
           },
         })}
+        className="w-full px-4 py-3 mt-1 bg-gray-900 border border-gray-700 text-white rounded-lg shadow-inner"
       />
       {errors.wpp && <p>{errors.wpp.message}</p>}
       <input
         type="submit"
         value={isLoading ? "Enviando, espere..." : "Enviar Solicitud"}
         disabled={isLoading}
+        className="mt-2 rounded-lg bg-gray-400 p-2 font-bold hover:animate-pulse"
       />
       {/* DISCLAIMER VISIBLE SOLO DURANTE LA CARGA */}
       {isLoading && (

@@ -15,10 +15,10 @@ export const Header: React.FC = () => {
   const closeMenu = () => setIsOpen(false);
 
   const logoStyle =
-    "text-3xl font-extrabold text-rose-500 tracking-wider hover:text-rose-400 transition-colors flex flex-row items-center";
+    "text-3xl font-extrabold text-rose-500 tracking-wider hover:text-rose-400 transition-colors flex flex-row items-center animate-pulse hover:underline";
 
   return (
-    <header className="bg-gray-900 shadow-xl sticky top-0 z-50">
+    <header className="bg-gray-900 shadow-xl sticky top-0 z-50 bg-gradient-to-b from-gray-900 to-gray-700 border-b border-rose-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 flex-row">
           {/* Logo/Título del Sitio */}
@@ -29,9 +29,9 @@ export const Header: React.FC = () => {
                 alt="Logo CTS"
                 width={60} // Tamaño de la imagen (ajustable)
                 height={60} // Tamaño de la imagen (ajustable)
-                className="rounded-full object-cover hover:animate-pulse"
+                className="rounded-full object-cover"
               />
-              COGO TATTOO STUDIO
+              <div className="font-pirata">COGO TATTOO STUDIO</div>
             </Link>
           </div>
 

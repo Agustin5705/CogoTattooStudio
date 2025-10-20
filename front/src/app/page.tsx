@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import ImageCarousel from "./components/ImageCarousel";
 
 // Datos de ejemplo para trabajos destacados (Reemplazar con datos reales más tarde)
 const featuredWork = [
@@ -11,11 +12,24 @@ const featuredWork = [
   { id: 4, src: "/cts.png", alt: "Placeholder" },
 ];
 
-// URLs simuladas para las imágenes destacadas
-// NOTA: DEBES ASEGURARTE DE QUE estas imágenes existan en tu carpeta /public/tattoos/
-// o reemplazarlas con imágenes de tu galería real.
-// Por ejemplo, puedes usar imágenes de placeholder de Cloudinary temporalmente
-// si ya tienes la configuración de hostnames lista.
+const MOCK_FEATURED_IMAGES = [
+  // Usaremos placeholders temporales
+  {
+    id: "c1",
+    url: "/cts.png",
+    description: "Tatuaje de realismo en escala de grises.",
+  },
+  {
+    id: "c2",
+    url: "/cts.png",
+    description: "Diseño minimalista fine line.",
+  },
+  {
+    id: "c3",
+    url: "/cts.png",
+    description: "Cobertura de brazo en estilo dark.",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -27,21 +41,21 @@ export default function HomePage() {
           {/* Usamos una imagen de fondo que represente el estilo Blackwork/Realismo */}
           {/* Usaremos una imagen de placeholder oscuro temporal, o debes subir una a /public/hero_bg.jpg */}
           <Image
-            src="https://placehold.co/1920x1080/0A0A0A/444444?text=Fondo+Hero"
+            src="/cts.png"
             alt="Fondo oscuro del estudio de tatuajes"
             layout="fill"
             objectFit="cover"
             priority
-            className="opacity-40" // Control de opacidad para que el texto resalte
+            className="opacity-10" // Control de opacidad para que el texto resalte
           />
         </div>
 
         {/* Contenido principal del Héroe */}
         <div className="relative z-10 p-6 max-w-4xl mx-auto backdrop-blur-sm bg-gray-900/50 rounded-xl shadow-2xl border border-rose-500/30">
-          <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4 uppercase tracking-tighter drop-shadow-lg">
+          <h1 className="text-6xl md:text-8xl text-white mb-4 uppercase tracking-tighter drop-shadow-lg font-pirata animate-pulse outline-double">
             COGO TATTOO STUDIO
           </h1>
-          <h2 className="text-2xl md:text-3xl text-rose-400 font-semibold mb-6 italic">
+          <h2 className="text-2xl md:text-3xl text-green-800 font-semibold mb-6 italic">
             Arte Corporal de Autor: Blackwork, Realismo y Vanguardia.
           </h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -50,11 +64,19 @@ export default function HomePage() {
             experiencia profesional y segura.
           </p>
           <Link href="/contact" passHref>
-            <span className="inline-block px-10 py-4 text-xl font-bold uppercase rounded-full bg-rose-600 text-white shadow-lg hover:bg-rose-700 transition duration-300 transform hover:scale-105 tracking-wider">
+            <span className="inline-block px-10 py-4 text-xl font-bold uppercase rounded-full bg-green-950 text-white shadow-lg hover:bg-rose-700 transition duration-300 transform hover:scale-105 tracking-wider">
               Agenda tu Consulta
             </span>
           </Link>
         </div>
+      </section>
+
+      <section className="relative w-full">
+        <ImageCarousel
+          images={MOCK_FEATURED_IMAGES}
+          intervalMs={5000}
+          heightClass="h-[calc(100vh-80px)]" // Altura que permite ver el header
+        />
       </section>
 
       {/* SECCIÓN DE TRABAJOS DESTACADOS */}
