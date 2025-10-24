@@ -25,6 +25,14 @@ model GalleryImage {
   id          String   @id @default(uuid()) @db.Uuid
   publicId    String   @unique // ID único que Cloudinary usa para borrar
   secureUrl   String   @unique // La URL de la imagen (lo que mostrarás)
-  tags      String[]
+  tags        String[]
+  createdAt   DateTime @default(now())
+}
+
+model HighlightImage {
+  id          String   @id @default(uuid()) @db.Uuid
+  publicId    String   @unique // ID único que Cloudinary usa para borrar
+  secureUrl   String   @unique // La URL de la imagen (lo que mostrarás)
+  tags        String[]
   createdAt   DateTime @default(now())
 }
