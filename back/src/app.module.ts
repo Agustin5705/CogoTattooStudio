@@ -6,6 +6,7 @@ import { FormModule } from './form/form.module';
 import { MailerModule } from './mailer/mailer.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { HighlightsModule } from './highlights/highlights.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { GalleryModule } from './gallery/gallery.module';
     MailerModule,
     CloudinaryModule,
     GalleryModule,
+    HighlightsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

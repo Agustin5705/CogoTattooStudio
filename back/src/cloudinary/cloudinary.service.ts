@@ -33,4 +33,24 @@ export class CloudinaryService {
       streamifier.createReadStream(file.buffer).pipe(uploadStream);
     });
   }
+  async destroy(publicId: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.destroy(publicId, (error, result) => {
+        if (error) return reject(error);
+
+        // Verifica que el resultado sea 'ok' (borrado exitoso)
+        if (result.result !== 'ok') {
+          // Si dice 'not found', lo tratamos como éxito (ya estaba borrado)
+          if (result.result === 'not found') {
+            return resolve();
+          }
+          // Si es otro error, lo rechazamos
+          return reject(
+            new Error(`Failed to destroy file ${publicId}: ${result.result}`),
+          );
+        }
+        resolve(); // Éxito en el borrado
+      });
+    });
+  }
 }

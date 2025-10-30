@@ -2,44 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import ImageCarousel from "./components/ImageCarousel";
-
-// Datos de ejemplo para trabajos destacados (Reemplazar con datos reales más tarde)
-const featuredWork = [
-  { id: 1, src: "/cts.png", alt: "Placeholder" },
-  { id: 2, src: "/cts.png", alt: "Placeholder" },
-  { id: 3, src: "/cts.png", alt: "Placeholder" },
-  { id: 4, src: "/cts.png", alt: "Placeholder" },
-];
-
-const MOCK_FEATURED_IMAGES = [
-  // Usaremos placeholders temporales
-  {
-    id: "c1",
-    url: "/cts.png",
-    description: "Tatuaje de realismo en escala de grises.",
-  },
-  {
-    id: "c2",
-    url: "/cts.png",
-    description: "Diseño minimalista fine line.",
-  },
-  {
-    id: "c3",
-    url: "/cts.png",
-    description: "Cobertura de brazo en estilo dark.",
-  },
-];
+// 🚨 Importamos el componente que maneja la lógica, carga y renderizado de los destacados.
+import HighlightsRenderer from "@/components/HighlightsRenderer";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* SECCIÓN HÉROE */}
+      {/* SECCIÓN HÉROE (ESTÁTICA) - SIN CAMBIOS */}
       <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
         {/* Fondo con imagen oscura (simulando blackwork) */}
         <div className="absolute inset-0 z-0">
-          {/* Usamos una imagen de fondo que represente el estilo Blackwork/Realismo */}
-          {/* Usaremos una imagen de placeholder oscuro temporal, o debes subir una a /public/hero_bg.jpg */}
           <Image
             src="/cts.png"
             alt="Fondo oscuro del estudio de tatuajes"
@@ -71,56 +43,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative w-full">
-        <ImageCarousel
-          images={MOCK_FEATURED_IMAGES}
-          intervalMs={5000}
-          heightClass="h-[calc(100vh-80px)]" // Altura que permite ver el header
-        />
-      </section>
+      {/* 🚨 SECCIONES DINÁMICAS: CARRUSEL Y PARRILLA CON DATA REAL */}
+      {/* Todo el contenido dinámico y la lógica de carga se maneja dentro de este componente. */}
+      <HighlightsRenderer />
 
-      {/* SECCIÓN DE TRABAJOS DESTACADOS */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-4xl font-bold text-white mb-2">
-            Portafolio Destacado
-          </h3>
-          <p className="text-lg text-gray-400 mb-12">
-            Una selección de nuestros trabajos más recientes y representativos.
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {featuredWork.map((item) => (
-              <div
-                key={item.id}
-                className="group relative overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.03] transition-transform duration-500 ease-out cursor-pointer"
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={500}
-                  height={500}
-                  objectFit="cover"
-                  className="w-full h-full object-cover transition duration-500 group-hover:opacity-75"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-base font-semibold border-b border-rose-500 p-1">
-                    Ver Galería
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <Link href="/gallery" passHref>
-            <span className="mt-12 inline-block px-8 py-3 text-lg font-medium rounded-lg border-2 border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white transition duration-300">
-              Ver el Portafolio Completo
-            </span>
-          </Link>
-        </div>
-      </section>
-
-      {/* SECCIÓN CTA (Llamada a la Acción Secundaria) */}
+      {/* SECCIÓN CTA (Llamada a la Acción Secundaria) - SIN CAMBIOS */}
       <section className="bg-gray-800 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">

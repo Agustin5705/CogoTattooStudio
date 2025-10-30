@@ -77,7 +77,7 @@ export class HighlightsService {
     }
 
     // 1. Borrar de Cloudinary
-    await this.cloudinaryService.deleteFile(highlight.publicId);
+    await this.cloudinaryService.destroy(highlight.publicId);
 
     // 2. Borrar de la base de datos
     await this.prisma.highlightImage.delete({ where: { id } });

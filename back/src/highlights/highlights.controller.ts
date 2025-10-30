@@ -33,13 +33,20 @@ export class HighlightsController {
     // Extrae el array 'tags[]' del FormData
     @Body('tags', new ParseArrayPipe({ items: String, optional: true }))
     tags: string[],
-    // Usamos el DTO para el resto del body, aunque sólo esperamos campos opcionales aquí
+    // Usamos el DTO para el resto del body
     @Body() body: Partial<CreateHighlightDto>,
   ) {
+    // 🚨 LA ÚNICA LÍNEA DE CÓDIGO NUEVA QUE ARREGLA TODO
+    // Convierte el string "true" o "false" (que viene de FormData) a un booleano real.
+    const isActiveBoolean =
+      body.isActive !== undefined
+        ? JSON.parse(String(body.isActive).toLowerCase())
+        : false;
+
     const data: CreateHighlightDto = {
       tags: tags || [],
-      isActive: body.isActive,
-      position: body.position,
+      isActive: isActiveBoolean, // <-- ¡Aquí usamos el valor booleano correcto!
+      position: (body.position as number) ?? null,
     };
 
     // El servicio manejará la subida a Cloudinary y el guardado en Neon

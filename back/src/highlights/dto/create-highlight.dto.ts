@@ -1,22 +1,28 @@
 import {
   IsArray,
   IsBoolean,
-  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
 } from 'class-validator';
+// 🚨 NECESITAS ESTA IMPORTACIÓN
+import { Type } from 'class-transformer';
 
-// NOTA: El archivo binario es manejado por el middleware (Multer) y NO se incluye aquí.
 export class CreateHighlightDto {
-  // Tags (requeridos para la navegación)
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
   tags: string[];
 
-  // Estado inicial (true por defecto, pero se puede definir)
+  // 🚨 CORRECCIÓN 1: Transforma el string a booleano antes de la validación.
+  @Type(() => Boolean)
   @IsBoolean()
   @IsOptional()
   isActive: boolean;
+
+  // 🚨 CORRECCIÓN 2: Transforma el string a número para la posición.
+  @Type(() => Number)
+  @IsNumber()
+  @IsOptional() // Es opcional al crear
+  position: number | null;
 }

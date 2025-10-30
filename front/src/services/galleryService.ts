@@ -33,6 +33,3 @@ export const getGalleryImages = async (): Promise<GalleryImage[]> => {
     throw new Error("Falló la conexión con el servidor de la galería.");
   }
 };
-
-// Nota: Necesitas el archivo de tipado GalleryImage en front/src/types/gallery.ts
-// Asegúrate de copiarlo desde el adminFront si aún no lo tienes.
