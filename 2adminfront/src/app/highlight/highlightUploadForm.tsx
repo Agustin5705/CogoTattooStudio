@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HighlightImage } from "@/types/highlight";
 
 // URL del endpoint de subida
-const HIGHLIGHTS_API_URL = "http://localhost:3001/highlights";
+const HIGHLIGHTS_API_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/highlights`;
 
 // Lista de tags disponibles (copiada de la captura de pantalla)
 const AVAILABLE_TAGS = [

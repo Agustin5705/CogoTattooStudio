@@ -6,9 +6,11 @@ import {
   UploadedFile,
   Body,
   ParseArrayPipe, // <-- CLAVE: Necesario para leer el array de FormData
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GalleryService } from './gallery.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 // No necesitamos un DTO simple si usamos ParseArrayPipe directamente en el @Body()
 
 @Controller('gallery')
@@ -21,6 +23,7 @@ export class GalleryController {
     return this.galleryService.findAllImages();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(

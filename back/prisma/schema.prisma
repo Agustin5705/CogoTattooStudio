@@ -39,3 +39,11 @@ model HighlightImage {
   isActive    Boolean  @default(false)
   position    Int?
 }
+
+model AdminUser {
+  id          Int      @id @default(autoincrement())
+  username    String   @unique @default("admin") 
+  hashedPassword String 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

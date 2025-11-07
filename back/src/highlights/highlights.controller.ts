@@ -11,11 +11,13 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { HighlightsService } from './highlights.service';
 import { CreateHighlightDto } from './dto/create-highlight.dto';
 import { UpdateHighlightDto } from './dto/update-highlight.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('highlights')
 export class HighlightsController {
@@ -26,6 +28,7 @@ export class HighlightsController {
     return this.highlightsService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file')) // Aplica el middleware Multer/FileInterceptor
   async create(
@@ -53,6 +56,7 @@ export class HighlightsController {
     return this.highlightsService.create(file, data);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -61,6 +65,7 @@ export class HighlightsController {
     return this.highlightsService.update(id, updateData);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT) // Retorna 204 No Content
   async delete(@Param('id') id: string) {

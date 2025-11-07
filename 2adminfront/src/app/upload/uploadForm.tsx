@@ -10,7 +10,7 @@ interface GalleryImage {
 }
 
 // Endpoint de prueba que debes reemplazar
-const UPLOAD_URL = "http://localhost:3001/gallery"; // Endpoint POST /gallery
+const UPLOAD_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/gallery`; // Endpoint POST /gallery
 // URL de Next.js para volver al dashboard
 const DASHBOARD_HREF = "/";
 
@@ -151,7 +151,13 @@ const UploadForm: React.FC = () => {
             navegación.
           </p>
         </header>
-
+        <img
+          src="/cts.png"
+          alt="Logo CTS"
+          height={100}
+          width={100}
+          className="mx-auto animate-pulse"
+        />
         <div className="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl border border-gray-700">
           {/* Mensajes de feedback */}
           {message && (

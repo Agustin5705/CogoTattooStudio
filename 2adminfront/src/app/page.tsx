@@ -1,5 +1,6 @@
 "use client";
 
+import LogoutButton from "@/components/LogoutButton";
 import React from "react";
 
 // Componente AdminButton (Integrado en el archivo de la página)
@@ -76,9 +77,17 @@ export default function AdminPage() {
             COGO | Panel de Control
           </h1>
           <p className="mt-3 text-lg text-gray-400">
-            Bienvenido, artista. Gestiona el contenido de tu web desde aquí.
+            Gestiona el contenido de tu web desde aquí.
           </p>
         </header>
+
+        <img
+          src="/cts.png"
+          alt="Logo CTS"
+          height={100}
+          width={100}
+          className="mx-auto animate-pulse"
+        />
 
         {/* Contenedor de Navegación */}
         <main className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
@@ -98,7 +107,9 @@ export default function AdminPage() {
             icon={HighlightIcon}
           />
         </main>
-
+        <div className="flex justify-center p-4">
+          <LogoutButton />
+        </div>
         {/* Footer simple de administración */}
         <footer className="mt-20 pt-8 border-t border-gray-700 text-center text-sm text-gray-500">
           © {new Date().getFullYear()} COGO Tattoo Studio.

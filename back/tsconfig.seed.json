@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    // 💡 Target ES2020 para características modernas como async/await
+    "target": "es2020",
+    "module": "es2020", // Mantenemos un módulo moderno
+    "moduleResolution": "node", // Usamos la resolución de módulos estándar de Node
+    "esModuleInterop": true,
+    "skipLibCheck": true, // Ignorar errores en node_modules
+    "outDir": "dist",
+    "strict": true, // Buenas prácticas de TS
+    "rootDir": "prisma"
+  },
+  "include": ["prisma/seed.ts"],
+  "exclude": ["node_modules"]
+}

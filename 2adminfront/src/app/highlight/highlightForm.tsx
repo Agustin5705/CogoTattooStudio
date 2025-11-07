@@ -7,8 +7,8 @@ import { HighlightImage, UpdateHighlightPayload } from "@/types/highlight";
 import { HighlightUploadForm } from "./highlightUploadForm";
 
 // --- Configuración y Constantes ---
-const HIGHLIGHTS_API_URL = "http://localhost:3001/highlights";
-const DASHBOARD_HREF = "/admin";
+const HIGHLIGHTS_API_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/highlights`;
+const DASHBOARD_HREF = "/";
 
 // ----------------------------------
 
@@ -289,15 +289,22 @@ export default function AdminHighlightsPage() {
           </a>
                    {" "}
           <h1 className="text-4xl font-bold text-rose-500">
-                        2. Gestor de Destacados (Carrusel)          {" "}
+            2. Gestor de Destacados (Carrusel){" "}
           </h1>
                    {" "}
           <p className="mt-2 text-lg text-gray-400">
-                        Controla qué imágenes se muestran en el carrusel de la
-            página             principal.          {" "}
+            Controla qué imágenes se muestran en el carrusel de la página
+            principal.{" "}
           </p>
                  {" "}
         </header>
+        <img
+          src="/cts.png"
+          alt="Logo CTS"
+          height={100}
+          width={100}
+          className="mx-auto animate-pulse"
+        />
                 {/* 1. Formulario de Subida (POST) */}
                 <HighlightUploadForm onUploadSuccess={handleNewUploadSuccess} />
                 {/* Mensaje de Error Global de la Lista/Gestión */}       {" "}
@@ -365,7 +372,7 @@ export default function AdminHighlightsPage() {
           {!isLoading && highlights.length === 0 && (
             <p className="text-center text-gray-500 p-8 border border-dashed border-gray-700 rounded-xl mt-6">
                             No hay destacados actualmente. Usa el formulario de
-              arriba para               subir la primera.            {" "}
+              arriba para subir la primera.{" "}
             </p>
           )}
                  {" "}
