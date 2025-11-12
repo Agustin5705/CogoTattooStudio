@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+2adminfront/ - Panel de Administración
 
-## Getting Started
+Este módulo es el Frontend de la aplicación diseñado exclusivamente para el Administrador o Tatuador. Es la interfaz protegida que interactúa con los endpoints seguros del Backend para la gestión de contenido.
 
-First, run the development server:
+Tecnologías Clave
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Framework: Next.js (React)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lenguaje: TypeScript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Estilo: CSS Modules / Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Estado: React Hooks
 
-## Learn More
+Consumo API: Fetch API
 
-To learn more about Next.js, take a look at the following resources:
+Funcionalidades y Rutas Protegidas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Esta aplicación se enfoca en la gestión de datos. Todas las rutas, excepto /login y los GET, están protegidas por un sistema de autenticación basado en el JSON Web Token (JWT) proporcionado por el Backend.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Rutas Principales:
 
-## Deploy on Vercel
+/ - Página de inicio con enlaces para gestionar galerias y destacados. (Protegido)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+/login - Acceso al sistema. (Público)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+/gallery - Gestión CRUD (Crear, Ver, Eliminar) de imágenes de la galería pública. (Protegido)
+
+/highlight - Gestión CRUD de trabajos destacados. (Protegido)
+
+Ejecución en Desarrollo Local
+
+ATENCIÓN! Conflicto de Puerto
+
+Esta aplicación, por ser Next.js, intenta ejecutarse en el puerto 3000. Si el Frontend del Consumidor Final (frontpublico/) ya está corriendo, ocurrirá un conflicto. Para el correcto desarrollo, asegúrate de que solo uno de los fronts use el puerto por defecto (como se indica en el README.md principal).
+
+Pasos para Iniciar
+
+Asegúrate de que el Backend (back/) esté corriendo en http://localhost:3001.
+
+Navega al directorio del admin: cd 2adminfront
+
+Instala las dependencias: npm install
+
+Inicia la aplicación (usando el puerto por defecto): npm run dev
+
+Acceso: http://localhost:3000
+
+Variables de Entorno Requeridas
+
+Este módulo requiere una única variable de entorno clave definida en el archivo .env.local (o su equivalente en producción):
+
+Variable: NEXT_PUBLIC_BACKEND_URL
+
+Descripción: La URL base de la API de NestJS.
+
+Uso: Todas las peticiones fetch de la aplicación se dirigen aquí.
+
+Valor de Desarrollo: http://localhost:3001/api

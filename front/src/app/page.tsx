@@ -57,7 +57,7 @@ export default function HomePage() {
             Hablemos de tu idea. La consulta es el primer paso para crear un
             diseño que defina tu estilo.
           </p>
-          <Link href="/contact" passHref>
+          <Link href="/form" passHref>
             <span className="inline-block px-10 py-4 text-xl font-bold rounded-lg bg-white text-gray-900 shadow-xl hover:bg-gray-200 transition duration-300 transform hover:-translate-y-1">
               Contáctanos Ahora
             </span>

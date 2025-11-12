@@ -1,98 +1,153 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+⚙️ back/ - API del Sistema COGO TATTOO
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este módulo es la fuente única de verdad para toda la plataforma. Está construido con NestJS y sigue un patrón de arquitectura modular para la gestión de datos, seguridad y servicios externos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+🛠️ Tecnologías y Servicios
 
-## Description
+ComponenteTecnologíaRolFramework
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+NestJS
 
-## Project setup
+Servidor Node.js modular.
 
-```bash
-$ npm install
-```
+Base de Datos
 
-## Compile and run the project
+PostgreSQL (vía Neon)
 
-```bash
-# development
-$ npm run start
+Persistencia de datos (Galería, Destacados, Logs de Contacto).
 
-# watch mode
-$ npm run start:dev
+ORM
 
-# production mode
-$ npm run start:prod
-```
+Prisma
 
-## Run tests
+Cliente ORM tipado para interactuar con PostgreSQL.
 
-```bash
-# unit tests
-$ npm run test
+Autenticación
 
-# e2e tests
-$ npm run test:e2e
+JWT
 
-# test coverage
-$ npm run test:cov
-```
+Implementación de tokens para proteger todas las rutas de administración.
 
-## Deployment
+Almacenamiento
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Cloudinary
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Servicio externo para el almacenamiento y entrega optimizada de imágenes de la Galería y Destacados.
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Correo
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Nodemailer / Gmail SMTP
 
-## Resources
+Servicio para el envío de notificaciones de contacto.
 
-Check out a few resources that may come in handy when working with NestJS:
+🧱 Estructura de Módulos
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+El backend se organiza en los siguientes módulos principales:
 
-## Support
+AuthModule: Maneja el inicio de sesión y la generación/validación de tokens JWT.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+CloudinaryModule: Servicio wrapper para las operaciones de subir y eliminar imágenes en Cloudinary.
 
-## Stay in touch
+ContactModule: Recibe las solicitudes del formulario público, guarda el registro en la DB y usa el MailerService.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+FeaturedModule: Gestión de los trabajos destacados del estudio (CRUD).
 
-## License
+GalleryModule: Gestión de imágenes de la galería pública (CRUD).
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+PrismaModule: Servicio global para inyectar el cliente Prisma en toda la aplicación.
+
+MailerModule: Configuración y servicio para el envío de correos (Nodemailer).
+
+🔑 Variables de Entorno (SETUP CRÍTICO)
+
+Para que el Backend funcione en modo de desarrollo (.env local) o producción, requiere la configuración de las siguientes variables sensibles:
+
+CategoríaVariableDescripciónBase de Datos
+
+DATABASE_URL
+
+Cadena de conexión completa a Neon DB (PostgreSQL).
+
+Autenticación
+
+JWT_SECRET
+
+Clave secreta para firmar los tokens JWT.
+
+Admin
+
+ADMIN_PASSWORD
+
+Contraseña pre-hasheada para la cuenta de administrador.
+
+Cloudinary
+
+CLOUDINARY_CLOUD_NAME
+
+Nombre de la nube.
+
+Cloudinary
+
+CLOUDINARY_API_KEY
+
+Clave pública de la API.
+
+Cloudinary
+
+CLOUDINARY_API_SECRET
+
+Secreto de la API (la más sensible).
+
+Correo
+
+MAIL_USER
+
+Email remitente (usado para la autenticación SMTP).
+
+Correo
+
+MAIL_PASS
+
+Contraseña de Aplicación generada por Google/SMTP.
+
+Correo
+
+MAIL_DESTINATION_ADDRESS
+
+Email que recibe las notificaciones de contacto.
+
+🚀 Guía de Operación y Desarrollo
+
+1. Instalación y Migraciones
+
+Instalar dependencias:
+
+npm install
+
+Generar el cliente Prisma basado en el esquema (schema.prisma):
+
+npx prisma generate
+
+Para realizar migraciones de esquema (si se modificó schema.prisma):
+
+npx prisma migrate dev --name <nombre_de_la_migracion>
+
+2. Ejecución Local
+
+Asegúrate de que DATABASE_URL esté configurada.
+
+Iniciar el servidor en modo desarrollo:
+
+npm run start:dev
+
+Puerto de API: http://localhost:3001
+
+📚 Documentación de la API (Swagger)
+
+La documentación de los endpoints está disponible de forma interactiva gracias a la integración con Swagger.
+
+Para acceder a la documentación interactiva, visita:
+
+➡️ http://localhost:3001/api/docs
+
+Aquí podrás ver todos los DTOs, los parámetros de las peticiones protegidas y los códigos de respuesta.

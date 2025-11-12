@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sobre Nosotros | COGO TATTOO STUDIO",
   description:
-    "Conoce la historia, filosofía y el artista detrás de COGO TATTOO STUDIO, especializado en Blackwork y Realismo.",
+    "Conoce la historia, filosofía y el artista detrás de COGO TATTOO STUDIO.",
 };
 
 export default function AboutPage() {
@@ -45,19 +45,14 @@ export default function AboutPage() {
 
             <article className="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700/50">
               <h2 className="text-3xl font-bold text-white mb-4 border-b border-rose-500/50 pb-2">
-                El Artista: Un Legado en Tinta
+                El Artista:
               </h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Detrás de COGO está [Nombre del Artista], un profesional con más
-                de [X] años de experiencia, reconocido por su manejo impecable
-                de las sombras y el contraste. Su trabajo se caracteriza por la
-                **intensidad dramática** y la durabilidad a largo plazo.
+                Detrás de COGO está Camilo Pereira, un profesional con muchos
+                años de experiencia, reconocido por su manejo impecable de las
+                sombras, el contraste y el trabajo de colores.
               </p>
               <ul className="text-gray-300 list-disc list-inside space-y-2 mt-4 ml-4">
-                <li>
-                  Especialidad en botánicos oscuros y figuras geométricas.
-                </li>
-                <li>Ganador de [Mencionar un premio o reconocimiento].</li>
                 <li>
                   Compromiso con la esterilización y seguridad de nivel
                   hospitalario.

@@ -10,15 +10,15 @@ export class MailerService {
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'agus5705@gmail.com', // Reemplaza con tu email de Gmail
-        pass: 'owwn fhur tpjt yoep', // Reemplaza con tu contraseña de aplicación
+        user: process.env.MAIL_USER, // Reemplaza con tu email de Gmail
+        pass: process.env.MAIL_PASS, // Reemplaza con tu contraseña de aplicación
       },
     });
   }
 
   async sendMail(to: string, subject: string, text: string, html: string) {
     await this.transporter.sendMail({
-      from: '"Nombre del remitente" <tu_email@gmail.com>',
+      from: '"COGO TATTOO Contacto" <${senderEmail}>',
       to,
       subject,
       text,

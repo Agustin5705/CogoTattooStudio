@@ -1,4 +1,3 @@
-// back/src/form/form.service.ts
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFormDto } from './dto/create-form.dto';
@@ -6,13 +5,18 @@ import { MailerService } from '../mailer/mailer.service';
 
 @Injectable()
 export class FormService {
+  // 🟢 SOLUCIÓN: Usar un valor por defecto (||) para satisfacer a TypeScript
+  // y asegurar que la variable se lea cuando el entorno esté cargado.
+  private readonly DESTINATION_EMAIL =
+    process.env.MAIL_DESTINATION_ADDRESS || 'destino-error@example.com';
+
   constructor(
     private prisma: PrismaService,
     private mailerService: MailerService,
   ) {}
 
   async create(data: CreateFormDto) {
-    // 1. Convertir la cadena de texto de la fecha a un objeto Date si existe
+    // ... (El resto del código es idéntico)
     const dataToSave = data.fecha
       ? {
           ...data,
@@ -20,10 +24,8 @@ export class FormService {
         }
       : data;
 
-    // 2. Guardar los datos de contacto en la base de datos
     const contact = await this.prisma.contact.create({ data: dataToSave });
 
-    // 3. Preparar el contenido del correo
     const emailContent = `
       <p>Se ha recibido un nuevo mensaje de contacto:</p>
       <ul>
@@ -35,9 +37,8 @@ export class FormService {
       </ul>
     `;
 
-    // 4. Enviar el correo usando el MailerService
     await this.mailerService.sendMail(
-      'agus5705@gmail.com', // Reemplaza con el email de destino
+      this.DESTINATION_EMAIL, // Usa la propiedad de clase
       'Nuevo mensaje de contacto',
       'Se ha recibido un nuevo mensaje de contacto',
       emailContent,

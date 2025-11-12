@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+frontpublico/ - Frontend de Consumidor Final
 
-## Getting Started
+Este módulo es la interfaz principal y pública de la plataforma, diseñada para mostrar el trabajo del estudio y facilitar el contacto con el tatuador.
 
-First, run the development server:
+Tecnologías Clave
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Framework: Next.js (React)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lenguaje: TypeScript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Estilo: CSS Modules / Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Consumo API: Fetch API
 
-## Learn More
+Rutas y Contenido
 
-To learn more about Next.js, take a look at the following resources:
+La aplicación es un sitio de una sola página (o con pocas rutas públicas), diseñado para una navegación fluida.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/ - Página Principal (Home)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contenido: Presentación del estudio, Galería de trabajos y la sección de Trabajos Destacados.
 
-## Deploy on Vercel
+Flujo: Obtiene la Galería y los Destacados directamente desde el Backend (API).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+/form - Formulario de Contacto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Flujo: Permite a los clientes enviar solicitudes o consultas. Los datos se envían a un endpoint público del Backend, el cual guarda el registro en la DB y dispara el envío de un correo electrónico al administrador.
+
+Ejecución en Desarrollo Local
+
+ATENCIÓN! Conflicto de Puerto
+
+Esta aplicación, por ser Next.js, intenta ejecutarse en el puerto 3000. Si el Frontend de Administración (2adminfront/) ya está corriendo, ocurrirá un conflicto.
+
+Para evitarlo, debes iniciar esta aplicación especificando un puerto diferente, como se indica en el README.md principal.
+
+Pasos para Iniciar
+
+Asegúrate de que el Backend (back/) esté corriendo en http://localhost:3001.
+
+Navega al directorio público: cd frontpublico
+
+Instala las dependencias: npm install
+
+Inicia la aplicación npm run dev
+
+Variables de Entorno Requeridas
+
+Este módulo requiere variables de entorno para la API y para los enlaces de redes sociales (que se muestran en el Footer).
+
+NEXT_PUBLIC_BACKEND_URL: URL base de la API de NestJS. (Valor de Desarrollo: http://localhost:3001/api)
+
+NEXT_PUBLIC_INSTAGRAM_URL: Enlace directo a la cuenta de Instagram.
+
+NEXT_PUBLIC_FACEBOOK_URL: Enlace directo a la cuenta de Facebook.
+
+NEXT_PUBLIC_WHATSAPP_LINK: Enlace directo de WhatsApp para contacto.
+
+NEXT_PUBLIC_EMAIL_ADDRESS: Correo electrónico de contacto del estudio.
